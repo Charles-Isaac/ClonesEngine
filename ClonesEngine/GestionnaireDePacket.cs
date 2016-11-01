@@ -20,7 +20,8 @@ namespace ClonesEngine
         CloseConnection = 7, //{PacketUse,ID}
         Ping = 8, //{PacketUse,ID,TargetID,TickData}
         Pong = 9, //{PacketUse,ID,TargetID,TickData}
-        //AutoVerif = 10, //gen random and keep in memory if rand is smaller than received then reset ID and PlayerCount
+        AskAutoVerif = 10, //{PacketUse,ID}  gen random and keep in memory if rand is smaller than received then reset ID and PlayerCount
+        AnswerAutoVerif = 11, //{PacketUse,ID,RandomData}
 
 
     }
@@ -33,6 +34,9 @@ namespace ClonesEngine
         PlayerData[] m_PlayerList = new PlayerData[255];
         long[] m_PlayerTime = new long[256];
         byte m_ID;
+        int AutoVerifData = 0;
+        Random RNG = new Random();
+        int LastTickCheck = 0;
 
 
         byte m_PlayerCount;
@@ -96,7 +100,7 @@ namespace ClonesEngine
             ThreadReception.Start();
             TickCounter = new Stopwatch();
             TickCounter.Start();
-            GetPlayerCount();
+            //GetPlayerCount();
         }
         public bool DemarrerLaConnection()
         {
@@ -114,81 +118,133 @@ namespace ClonesEngine
         
         private void Reception()
         {
+            int TryCount = 0;
             while (true)
             {
-                m_Receiver = ConnectionUDP.Receiver();
-                switch (m_Receiver[0])
+
+
+                do
                 {
-                    case (byte)PacketUse.AskNumberOfPlayer:
-
-                        if (m_ID != 0)
+                    Exit();
+                    TryCount++;
+                    Thread.Sleep(250);
+                    Send(TramePreGen.AskNumberOfPlayer);
+                    Thread.Sleep(50);
+                    do
+                    {
+                        m_Receiver = ConnectionUDP.Receiver();
+                        switch (m_Receiver[0])
                         {
-                            Send(TramePreGen.AnswerListeJoueur(m_PlayerCount, m_ID));
-                        }
-                        
+                            case (byte)PacketUse.AskNumberOfPlayer:
+                                if (m_ID != 0)
+                                {
+                                    Send(TramePreGen.AnswerListeJoueur(m_PlayerCount, m_ID));
+                                }
+                                break;
 
-                        break;
-                    case (byte)PacketUse.AnswerNumberOfPlayer:
+                            case (byte)PacketUse.AnswerNumberOfPlayer:
 
-                        Enter();
-                        if (m_Receiver[2] > m_PlayerCount || m_ID == 0)
+                                Enter();
+                                if (m_Receiver[2] > m_PlayerCount || m_ID == 0)
+                                {
+                                    //this may reset the last player
+
+                                    for (; m_PlayerCount < m_Receiver[2]; m_PlayerCount++)
+                                    {
+                                        m_PlayerList[m_PlayerCount] = new PlayerData(m_PlayerCount, TickCounter.ElapsedTicks);
+                                        m_PlayerTime[m_PlayerCount] = Environment.TickCount;
+                                    }
+                                    if (m_ID == 0)
+                                    {
+                                        m_ID = m_Receiver[2];
+                                        m_ID++;
+                                        m_PlayerCount++;
+                                        m_PlayerList[m_ID] = new PlayerData(m_ID, TickCounter.ElapsedTicks);
+                                        m_PlayerTime[m_ID] = Environment.TickCount;
+
+                                        Send(TramePreGen.AnswerListeJoueur(m_PlayerCount, m_ID));
+                                    }
+                                }
+                                Exit();
+
+                                break;
+                            case (byte)PacketUse.InfoJoueur:
+
+                                m_PlayerList[m_Receiver[1]] = TramePreGen.ReceiverInfoJoueur(m_Receiver);
+                                m_PlayerTime[m_Receiver[1]] = Environment.TickCount;
+
+
+
+                                break;
+                            case (byte)PacketUse.ResetAllID:
+                                if (m_Receiver[1] == m_ID)
+                                {
+                                    m_ID = 1;
+                                    m_PlayerCount = 1;
+                                    //GenMap();
+                                }
+                                else
+                                {
+                                    m_ID = 0;
+                                    m_PlayerCount = 0;
+                                    Send(TramePreGen.AskNumberOfPlayer);
+                                }
+                                break;
+
+                            case (byte)PacketUse.Ping:
+                                if (m_Receiver[2] == m_ID)
+                                {
+                                    m_Receiver[1] ^= m_Receiver[2] ^= m_Receiver[1] ^= m_Receiver[2];  //swap 1 w/ 2
+                                }
+                                m_Receiver[0] = (byte)PacketUse.Pong;
+                                Send(m_Receiver);
+                                break;
+
+                            case (byte)PacketUse.AskAutoVerif:
+                                if (m_Receiver[1] == m_ID)
+                                {
+                                    AutoVerifData = RNG.Next(1, int.MaxValue);
+                                    Send(TramePreGen.AnswerAutoVerif(AutoVerifData, m_ID));
+                                }
+                                break;
+
+                            case (byte)PacketUse.AnswerAutoVerif:
+                                if (m_Receiver[1] == m_ID)
+                                {
+                                    if (AutoVerifData < BitConverter.ToInt32(m_Receiver, 2))
+                                    {
+                                        m_ID = 0;
+                                        m_PlayerCount = 0;
+                                        Send(TramePreGen.AskNumberOfPlayer);
+                                    }
+                                }
+                                break;
+
+                            default:
+                                break;
+                        }//Switch
+
+                        if (LastTickCheck + 5000 < Environment.TickCount)
                         {
-                            //this may reset the last player
-                            
-                            for (; m_PlayerCount < m_Receiver[2]; m_PlayerCount++)
-                            {
-                                m_PlayerList[m_PlayerCount] = new PlayerData(m_PlayerCount, TickCounter.ElapsedTicks);
-                                m_PlayerTime[m_PlayerCount] = Environment.TickCount;
-                            }
-                            if (m_ID == 0)
-                            {
-                                m_ID = m_Receiver[2];
-                                m_ID++;
-                                m_PlayerCount++;
-                                m_PlayerList[m_ID] = new PlayerData(m_ID, TickCounter.ElapsedTicks);
-                                m_PlayerTime[m_ID] = Environment.TickCount;
-
-                                Send(TramePreGen.AnswerListeJoueur(m_PlayerCount, m_ID));
-                            }
-                        }
-                        Exit();
-
-                        break;
-                    case (byte)PacketUse.InfoJoueur:
-
-                        m_PlayerList[m_Receiver[1]] = TramePreGen.ReceiverInfoJoueur(m_Receiver);
-                        m_PlayerTime[m_Receiver[1]] = Environment.TickCount;
-
-                        break;
-                    case (byte)PacketUse.ResetAllID:
-                        if (m_Receiver[1] == m_ID)
-                        {
-                            m_ID = 1;
-                            m_PlayerCount = 1;
-                            //GenMap();
-                        }
-                        else
-                        {
-                            m_ID = 0;
-                            m_PlayerCount = 0;
+                            LastTickCheck = Environment.TickCount;
+                            Send(TramePreGen.AskAutoVerif(m_ID));
                         }
 
-                        
-
-                        break;
-                    case (byte)PacketUse.Ping:
-                        if (m_Receiver[2] == m_ID)
-                        {
-                            m_Receiver[1] ^= m_Receiver[2] ^= m_Receiver[1] ^= m_Receiver[2];  //swap 1 w/ 2
-                        }
-                        m_Receiver[0] = (byte)PacketUse.Pong;
-                        Send(m_Receiver);
-                        break;
-                    default:
-                        break;
-                }//Switch
-
-            }//While(true)
+                    } while (m_ID != 0);//While(true)
+                    Enter();
+                } while (TryCount < 10 && m_ID == 0);
+                if (TryCount == 10 && m_ID == 0)
+                {
+                    //GenMap();
+                    m_ID = 1;
+                    m_PlayerCount = 1;
+                    
+                    //Send(TramePreGen.AnswerMap)
+                }
+                TryCount = 0;
+                Thread.Sleep(300);
+                Send(TramePreGen.AskAutoVerif(ID));
+            }
         }
 
 
@@ -203,7 +259,6 @@ namespace ClonesEngine
         }
         public void Exit()
         {
-            if (!Locked) System.Windows.Forms.MessageBox.Show("Exit manquant");
             Locked = false;
         }
 
@@ -212,24 +267,10 @@ namespace ClonesEngine
 
         private void GetPlayerCount()
         {
-            int TryCount = 0;
-            while (TryCount < 10 && m_ID == 0)
-            {
+            
+            
+            
 
-                TryCount++;
-                Thread.Sleep(250);
-                Send(TramePreGen.AskNumberOfPlayer);
-                Thread.Sleep(50);
-                Enter();
-                Exit();
-            }
-            if (TryCount == 10 && m_ID == 0)
-            {
-                //GenMap();
-                m_ID = 1;
-                m_PlayerCount = 1;
-                //Send(TramePreGen.AnswerMap)
-            }
         }
 
         public void Send(byte[] data)

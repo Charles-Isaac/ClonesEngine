@@ -2,3 +2,12 @@ C:\Users\Charles-Isaac\Desktop\ClonesEngine\ClonesEngine\obj\Release\ClonesEngin
 C:\Users\Charles-Isaac\Desktop\ClonesEngine\ClonesEngine\obj\Release\ClonesEngine.frmJeu.resources
 C:\Users\Charles-Isaac\Desktop\ClonesEngine\ClonesEngine\obj\Release\ClonesEngine.Properties.Resources.resources
 C:\Users\Charles-Isaac\Desktop\ClonesEngine\ClonesEngine\obj\Release\ClonesEngine.csproj.GenerateResource.Cache
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\ClonesEngine\obj\Release\ClonesEngine.csprojResolveAssemblyReference.cache
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\ClonesEngine\obj\Release\ClonesEngine.Properties.Resources.resources
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\ClonesEngine\obj\Release\ClonesEngine.csproj.GenerateResource.Cache
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\ClonesEngine\bin\Release\ClonesEngine.exe.config
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\ClonesEngine\bin\Release\ClonesEngine.exe
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\ClonesEngine\bin\Release\ClonesEngine.pdb
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\ClonesEngine\bin\Release\protobuf-net.dll
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\ClonesEngine\obj\Release\ClonesEngine.exe
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\ClonesEngine\obj\Release\ClonesEngine.pdb

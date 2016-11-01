@@ -12,9 +12,9 @@ namespace ClonesEngine
 
         public static byte[] AskNumberOfPlayer
         {
-            get { return  new byte[1]; }
+            get { return new byte[1]; }
         }
-        
+
         public static byte[] AnswerListeJoueur(byte NJoueur, byte ID)
         {
             byte[] Answer = new byte[3/*1 + 1 + 1*/];
@@ -23,7 +23,7 @@ namespace ClonesEngine
             Answer[2] = NJoueur;
             return Answer;
         }
-        
+
         public static PlayerData ReceiverInfoJoueur(byte[] Data)
         {
             byte[] Player = new byte[Data.Length - 6];
@@ -69,7 +69,30 @@ namespace ClonesEngine
                 return ProtoBuf.Serializer.Deserialize<PlayerData>(ms);
             }
         }
-        
-        
+
+        public static byte[] AskAutoVerif(byte ID)
+        {
+            byte[] Trame = new byte[2];
+            Trame[0] = (byte)PacketUse.AskAutoVerif;
+            Trame[1] = ID;
+            return Trame;
+        }
+        public static byte[] AnswerAutoVerif(int Data, byte ID)
+        {
+            byte[] bData = BitConverter.GetBytes(Data);
+            byte[] Trame = new byte[6];
+            Trame[0] = (byte)PacketUse.AnswerAutoVerif;
+            Trame[1] = ID;
+
+            for (int i = 0; i < bData.Length; i++)
+            {
+                Trame[i + 2] = bData[i];
+            }
+
+            return Trame;
+        }
+
+
+
     }
 }

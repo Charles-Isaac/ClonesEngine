@@ -1,1 +1,2 @@
 C:\Users\Charles-Isaac\Desktop\ClonesEngine\ClonesEngine\bin\Debug\ClonesEngine.exe.config
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\ClonesEngine\bin\Debug\ClonesEngine.exe.config
