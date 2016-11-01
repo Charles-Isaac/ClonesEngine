@@ -26,16 +26,12 @@ namespace TopDownShooterComm
         bool update = true;
         bool mouse = true;
         Random RNG;
-        byte ID;
+        //byte ID;
         public frmJeu()
         {
             InitializeComponent();
-            ProtoBuf.Meta.RuntimeTypeModel.Default.Add(typeof(Point), true);
-            ProtoBuf.Meta.RuntimeTypeModel.Default[typeof(Point)].Add(1, "X").Add(2, "Y");
-            ProtoBuf.Meta.RuntimeTypeModel.Default.Add(typeof(PointF), true);
-            ProtoBuf.Meta.RuntimeTypeModel.Default[typeof(PointF)].Add(1, "X").Add(2, "Y");
+            
             RNG = new Random();
-            ID = (byte)(RNG.Next(255) + 1);
             GP = new GestionnaireDePacket();
             this.DoubleBuffered = true;
         }
@@ -47,7 +43,7 @@ namespace TopDownShooterComm
             {
                 Invoke(new Action(() =>
                 {
-                    for (int i = 0; i < GP.PlayerCount; i++)
+                    for (int i = 1; i <= GP.PlayerCount; i++)
                     {
                         int X, Y;
                         X = GP.PlayerList[i].Position.X;
@@ -116,14 +112,15 @@ namespace TopDownShooterComm
         {
             Invoke(new Action(() =>
             {
-                for (int i = 1; i < GP.PlayerCount + 1; i++)////////////////////////////////////+ 1
+                Graphics g = this.CreateGraphics();
+                for (int i = 1; i <= GP.PlayerCount; i++)////////////////////////////////////+ 1
                 {
                     int X = 0, Y = 0;
                     X = GP.PlayerList[i].Position.X;
                     Y = GP.PlayerList[i].Position.Y;
 
 
-                    Graphics g = this.CreateGraphics();
+                    
                     g.FillEllipse(new SolidBrush(Color.Black), X - 10, Y - 10, 20, 20);
                     /*rtb1.Text += a.ToString() + "x:" + c.ToString() + "y\n";
                     rtb1.SelectionStart = rtb1.Text.Length;
@@ -134,13 +131,16 @@ namespace TopDownShooterComm
                         this.Refresh();
                     }
                 }
+                g.FillEllipse(new SolidBrush(Color.Black), 25 - 10, 25 - 10, 20, 20);
                 if (MouseButtons == MouseButtons.Left)//mouse)
                 {
 
 
                     Point Light = this.PointToClient(Cursor.Position);
-                    GP.PlayerList[GP.ID].Position = Light;
-                    GP.Send(TramePreGen.InfoJoueur(GP.PlayerList[GP.ID], GP.ID, GP.PacketID));
+                    PlayerData TempPlayer = new PlayerData();
+
+                    TempPlayer.Position = Light;
+                    GP.Send(TramePreGen.InfoJoueur(TempPlayer, GP.ID, GP.PacketID));
 
 
 

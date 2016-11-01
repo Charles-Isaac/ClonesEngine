@@ -8,6 +8,6 @@ namespace TopDownShooterComm
 {
     class GestionnaireJeu
     {
-
+        
     }
 }

@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace TopDownShooterComm
 {
     enum PacketUse
     {
-        AskListeJoueur = 0, //{PacketUse,ID}
-        AnswerListeJoueur = 1, //{PacketUse,ID,PlayerCount}
+        AskNumberOfPlayer = 0, //{PacketUse,ID}
+        AnswerNumberOfPlayer = 1, //{PacketUse,ID,PlayerCount}
         InfoJoueur = 2, //{PacketUse,ID,PlayerData}
         AskMap = 3, //{PacketUse,ID}
         AnswerMap = 4, //{PacketUse,ID,Data}
@@ -74,6 +75,10 @@ namespace TopDownShooterComm
 
         public GestionnaireDePacket()
         {
+            ProtoBuf.Meta.RuntimeTypeModel.Default.Add(typeof(Point), true);
+            ProtoBuf.Meta.RuntimeTypeModel.Default[typeof(Point)].Add(1, "X").Add(2, "Y");
+            ProtoBuf.Meta.RuntimeTypeModel.Default.Add(typeof(PointF), true);
+            ProtoBuf.Meta.RuntimeTypeModel.Default[typeof(PointF)].Add(1, "X").Add(2, "Y");
             for (int i = 0; i < 255; i++)
             {
                 m_PlayerList[i] = new PlayerData();
@@ -114,7 +119,7 @@ namespace TopDownShooterComm
                 m_Receiver = ConnectionUDP.Receiver();
                 switch (m_Receiver[0])
                 {
-                    case (byte)PacketUse.AskListeJoueur:
+                    case (byte)PacketUse.AskNumberOfPlayer:
 
                         if (m_ID != 0)
                         {
@@ -123,11 +128,13 @@ namespace TopDownShooterComm
                         
 
                         break;
-                    case (byte)PacketUse.AnswerListeJoueur:
+                    case (byte)PacketUse.AnswerNumberOfPlayer:
 
+                        Enter();
                         if (m_Receiver[2] > m_PlayerCount || m_ID == 0)
                         {
                             //this may reset the last player
+                            
                             for (; m_PlayerCount < m_Receiver[2]; m_PlayerCount++)
                             {
                                 m_PlayerList[m_PlayerCount] = new PlayerData(m_PlayerCount, TickCounter.ElapsedTicks);
@@ -144,6 +151,7 @@ namespace TopDownShooterComm
                                 Send(TramePreGen.AnswerListeJoueur(m_PlayerCount, m_ID));
                             }
                         }
+                        Exit();
 
                         break;
                     case (byte)PacketUse.InfoJoueur:
@@ -173,6 +181,7 @@ namespace TopDownShooterComm
                         {
                             m_Receiver[1] ^= m_Receiver[2] ^= m_Receiver[1] ^= m_Receiver[2];  //swap 1 w/ 2
                         }
+                        m_Receiver[0] = (byte)PacketUse.Pong;
                         Send(m_Receiver);
                         break;
                     default:
@@ -184,28 +193,43 @@ namespace TopDownShooterComm
 
 
 
+
+        private bool Locked = false;
+        public void Enter()
+        {
+            // Yield until acquired is false
+            while (Locked) { Thread.Sleep(1); }
+            Locked = true;
+        }
+        public void Exit()
+        {
+            if (!Locked) System.Windows.Forms.MessageBox.Show("Exit manquant");
+            Locked = false;
+        }
+
+
+
+
         private void GetPlayerCount()
         {
             int TryCount = 0;
             while (TryCount < 10 && m_ID == 0)
             {
+
                 TryCount++;
                 Thread.Sleep(250);
-                Send(TramePreGen.AskListeJoueur);
+                Send(TramePreGen.AskNumberOfPlayer);
                 Thread.Sleep(50);
+                Enter();
+                Exit();
             }
-            if (TryCount == 10)
+            if (TryCount == 10 && m_ID == 0)
             {
                 //GenMap();
                 m_ID = 1;
                 m_PlayerCount = 1;
                 //Send(TramePreGen.AnswerMap)
             }
-        }
-
-        private void SetID()
-        {
-            Send(TramePreGen.AskListeJoueur);
         }
 
         public void Send(byte[] data)

@@ -10,15 +10,15 @@ namespace TopDownShooterComm
     static class TramePreGen
     {
 
-        public static byte[] AskListeJoueur
+        public static byte[] AskNumberOfPlayer
         {
-            get { return  new byte[1]; ; }
+            get { return  new byte[1]; }
         }
         
         public static byte[] AnswerListeJoueur(byte NJoueur, byte ID)
         {
             byte[] Answer = new byte[3/*1 + 1 + 1*/];
-            Answer[0] = (byte)PacketUse.AnswerListeJoueur;
+            Answer[0] = (byte)PacketUse.AnswerNumberOfPlayer;
             Answer[1] = ID;
             Answer[2] = NJoueur;
             return Answer;

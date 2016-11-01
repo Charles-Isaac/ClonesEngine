@@ -11,7 +11,11 @@ namespace TopDownShooterComm
         {
             InitializeSender();
             //InitializeReceiver();
-            receivingClient = new UdpClient(port);
+            receivingClient = new UdpClient();
+            receivingClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+            receivingClient.Client.Bind(new IPEndPoint(IPAddress.Any, port));
+            /*
+                        receivingClient = new UdpClient(port);*/
             endPoint = new IPEndPoint(IPAddress.Any, port);
         }
 
@@ -34,6 +38,7 @@ namespace TopDownShooterComm
         {
             sendingClient = new UdpClient(broadcastAddress, port);
             sendingClient.EnableBroadcast = true;
+            
         }
         
         public byte[] Receiver()

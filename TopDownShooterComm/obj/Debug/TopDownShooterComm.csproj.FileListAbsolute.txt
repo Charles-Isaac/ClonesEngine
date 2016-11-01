@@ -34,3 +34,11 @@ C:\Users\Charles-Isaac\Desktop\Shool\TopDownShooterCommV1.2\TopDownShooterComm\o
 C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\TopDownShooterComm\bin\Debug\TopDownShooterComm.exe.config
 C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\TopDownShooterComm\obj\Debug\TopDownShooterComm.exe
 C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\TopDownShooterComm\obj\Debug\TopDownShooterComm.pdb
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\TopDownShooterComm\bin\Debug\TopDownShooterComm.exe
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\TopDownShooterComm\bin\Debug\TopDownShooterComm.pdb
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\TopDownShooterComm\bin\Debug\protobuf-net.dll
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\TopDownShooterComm\obj\Debug\TopDownShooterComm.csprojResolveAssemblyReference.cache
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\TopDownShooterComm\obj\Debug\TopDownShooterComm.frmJeu.resources
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\TopDownShooterComm\obj\Debug\TopDownShooterComm.Form2.resources
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\TopDownShooterComm\obj\Debug\TopDownShooterComm.Properties.Resources.resources
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\TopDownShooterComm\obj\Debug\TopDownShooterComm.csproj.GenerateResource.Cache

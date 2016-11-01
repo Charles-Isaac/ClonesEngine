@@ -20,3 +20,14 @@ C:\Users\Charles-Isaac\Desktop\Shool\TopDownShooterCommV1.2\TopDownShooterComm\o
 C:\Users\Charles-Isaac\Desktop\Shool\TopDownShooterCommV1.2\TopDownShooterComm\obj\Release\TopDownShooterComm.csproj.GenerateResource.Cache
 C:\Users\Charles-Isaac\Desktop\Shool\TopDownShooterCommV1.2\TopDownShooterComm\obj\Release\TopDownShooterComm.exe
 C:\Users\Charles-Isaac\Desktop\Shool\TopDownShooterCommV1.2\TopDownShooterComm\obj\Release\TopDownShooterComm.pdb
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\TopDownShooterComm\bin\Release\TopDownShooterComm.exe.config
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\TopDownShooterComm\bin\Release\TopDownShooterComm.exe
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\TopDownShooterComm\bin\Release\TopDownShooterComm.pdb
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\TopDownShooterComm\bin\Release\protobuf-net.dll
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\TopDownShooterComm\obj\Release\TopDownShooterComm.csprojResolveAssemblyReference.cache
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\TopDownShooterComm\obj\Release\TopDownShooterComm.frmJeu.resources
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\TopDownShooterComm\obj\Release\TopDownShooterComm.Form2.resources
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\TopDownShooterComm\obj\Release\TopDownShooterComm.Properties.Resources.resources
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\TopDownShooterComm\obj\Release\TopDownShooterComm.csproj.GenerateResource.Cache
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\TopDownShooterComm\obj\Release\TopDownShooterComm.exe
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\TopDownShooterComm\obj\Release\TopDownShooterComm.pdb
