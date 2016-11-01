@@ -1,6 +1,6 @@
 ﻿namespace TopDownShooterComm
 {
-    partial class frmJeu
+    partial class frmMain
     {
         /// <summary>
         /// Variable nécessaire au concepteur.
@@ -28,35 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
-            // timer1
-            // 
-            this.timer1.Interval = 1;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // frmJeu
+            // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Name = "frmJeu";
-            this.Text = "Chat";
+            this.Name = "frmMain";
+            this.Text = "Main";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.frmJeu_Load);
-            this.Click += new System.EventHandler(this.frmJeu_Click);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.frmJeu_Paint);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmJeu_KeyDown);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.frmJeu_KeyPress);
-            this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.frmJeu_MouseDoubleClick);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.frmMain_Paint);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.Timer timer1;
     }
 }
 

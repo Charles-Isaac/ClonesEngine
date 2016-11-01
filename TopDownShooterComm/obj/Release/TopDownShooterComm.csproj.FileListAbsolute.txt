@@ -31,3 +31,4 @@ C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\TopDow
 C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\TopDownShooterComm\obj\Release\TopDownShooterComm.csproj.GenerateResource.Cache
 C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\TopDownShooterComm\obj\Release\TopDownShooterComm.exe
 C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\TopDownShooterComm\obj\Release\TopDownShooterComm.pdb
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\TopDownShooterComm\obj\Release\TopDownShooterComm.frmMain.resources

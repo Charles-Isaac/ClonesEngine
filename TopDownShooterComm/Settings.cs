@@ -13,6 +13,7 @@ namespace TopDownShooterComm
         {
             get { return new Point(1000, 1000); }
             //  Point DefaultResolution = new Point(1000, 1000);
+            //Not implemented yet
         }
 
     }
