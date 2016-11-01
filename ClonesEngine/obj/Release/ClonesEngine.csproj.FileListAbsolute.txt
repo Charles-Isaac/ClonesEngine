@@ -1,0 +1,4 @@
+C:\Users\Charles-Isaac\Desktop\ClonesEngine\ClonesEngine\obj\Release\ClonesEngine.csprojResolveAssemblyReference.cache
+C:\Users\Charles-Isaac\Desktop\ClonesEngine\ClonesEngine\obj\Release\ClonesEngine.frmJeu.resources
+C:\Users\Charles-Isaac\Desktop\ClonesEngine\ClonesEngine\obj\Release\ClonesEngine.Properties.Resources.resources
+C:\Users\Charles-Isaac\Desktop\ClonesEngine\ClonesEngine\obj\Release\ClonesEngine.csproj.GenerateResource.Cache
