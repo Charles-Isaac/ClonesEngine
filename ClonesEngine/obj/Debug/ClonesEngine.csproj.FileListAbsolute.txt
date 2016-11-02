@@ -1,2 +1,10 @@
 C:\Users\Charles-Isaac\Desktop\ClonesEngine\ClonesEngine\bin\Debug\ClonesEngine.exe.config
 C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\ClonesEngine\bin\Debug\ClonesEngine.exe.config
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\ClonesEngine\bin\Debug\ClonesEngine.exe
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\ClonesEngine\bin\Debug\ClonesEngine.pdb
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\ClonesEngine\bin\Debug\protobuf-net.dll
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\ClonesEngine\obj\Debug\ClonesEngine.Properties.Resources.resources
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\ClonesEngine\obj\Debug\ClonesEngine.csproj.GenerateResource.Cache
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\ClonesEngine\obj\Debug\ClonesEngine.exe
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\ClonesEngine\obj\Debug\ClonesEngine.pdb
+C:\Users\Charles-Isaac\Documents\Visual Studio 2015\Projects\ClonesEngine\ClonesEngine\obj\Debug\ClonesEngine.Main.resources

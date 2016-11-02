@@ -67,6 +67,9 @@
     <Compile Include="Settings.cs" />
     <Compile Include="TramePreGen.cs" />
     <Compile Include="UDPConnecter.cs" />
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

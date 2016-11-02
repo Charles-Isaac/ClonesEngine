@@ -25,9 +25,12 @@ namespace ClonesEngine
         long m_LastTickUpdate;
         [XmlElement(Order = 6)]
         byte m_Velocite;
-       // [XmlElement(Order = 7)]
-       // List<Projectile> Bullet;
+        [XmlElement(Order = 7)]
+        int m_Couleur;
 
+        /*[XmlElement(Order = 8)]
+        List<Projectile> Bullet;
+        */
         public PlayerData()
         {
             m_LastTickUpdate = 0;
@@ -36,6 +39,7 @@ namespace ClonesEngine
             m_DirectionDeplacement = new PointF(0, 0);
             m_ID = 0;
             m_Velocite = 10;
+            m_Couleur = Color.Black.ToArgb();
         }
         public PlayerData(byte IDConstructeur, long TickCount)
         {
@@ -47,7 +51,11 @@ namespace ClonesEngine
             m_Velocite = 10;
         }
 
-
+        public int Couleur
+        {
+            get { return m_Couleur; }
+            set { m_Couleur = value; }
+        }
 
         public void AjouterProjectile(long TickCount)
         {
@@ -59,10 +67,12 @@ namespace ClonesEngine
             m_Position.X += (int)(m_DirectionDeplacement.X * m_Velocite * (TickCount - m_LastTickUpdate) / 20);
             m_Position.Y += (int)(m_DirectionDeplacement.Y * m_Velocite * (TickCount - m_LastTickUpdate) / 20);
 
-           /* for (int i = 0; i < Bullet.Count; i++)
-            {
-                Bullet[i].UpdateStatus(TickCount);
-            }*/
+
+
+            /* for (int i = 0; i < Bullet.Count; i++)
+             {
+                 Bullet[i].UpdateStatus(TickCount);
+             }*/
 
             m_LastTickUpdate = TickCount;
         }

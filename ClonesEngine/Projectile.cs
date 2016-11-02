@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Xml;
+using System.Xml.Serialization;
+using ProtoBuf;
 
 namespace ClonesEngine
 {
+    [XmlType]
     class Projectile
     {
         private Point m_Position;

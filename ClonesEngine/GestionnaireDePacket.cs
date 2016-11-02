@@ -83,6 +83,7 @@ namespace ClonesEngine
             ProtoBuf.Meta.RuntimeTypeModel.Default[typeof(Point)].Add(1, "X").Add(2, "Y");
             ProtoBuf.Meta.RuntimeTypeModel.Default.Add(typeof(PointF), true);
             ProtoBuf.Meta.RuntimeTypeModel.Default[typeof(PointF)].Add(1, "X").Add(2, "Y");
+
             for (int i = 0; i < 255; i++)
             {
                 m_PlayerList[i] = new PlayerData();
@@ -115,7 +116,7 @@ namespace ClonesEngine
                 throw e;
             }
         }
-        
+
         private void Reception()
         {
             int TryCount = 0;
@@ -163,6 +164,7 @@ namespace ClonesEngine
                                         m_PlayerTime[m_ID] = Environment.TickCount;
 
                                         Send(TramePreGen.AnswerListeJoueur(m_PlayerCount, m_ID));
+                                        Send(TramePreGen.AskAutoVerif(ID));
                                     }
                                 }
                                 Exit();
@@ -181,6 +183,7 @@ namespace ClonesEngine
                                 {
                                     m_ID = 1;
                                     m_PlayerCount = 1;
+                                    Thread.Sleep(RNG.Next(0, 50));
                                     //GenMap();
                                 }
                                 else
@@ -215,6 +218,7 @@ namespace ClonesEngine
                                     {
                                         m_ID = 0;
                                         m_PlayerCount = 0;
+
                                         Send(TramePreGen.AskNumberOfPlayer);
                                     }
                                 }
@@ -226,7 +230,7 @@ namespace ClonesEngine
 
                         if (LastTickCheck + 5000 < Environment.TickCount)
                         {
-                            LastTickCheck = Environment.TickCount;
+                            LastTickCheck = Environment.TickCount + RNG.Next(1, 500);
                             Send(TramePreGen.AskAutoVerif(m_ID));
                         }
 
@@ -238,7 +242,7 @@ namespace ClonesEngine
                     //GenMap();
                     m_ID = 1;
                     m_PlayerCount = 1;
-                    
+
                     //Send(TramePreGen.AnswerMap)
                 }
                 TryCount = 0;
@@ -260,17 +264,6 @@ namespace ClonesEngine
         public void Exit()
         {
             Locked = false;
-        }
-
-
-
-
-        private void GetPlayerCount()
-        {
-            
-            
-            
-
         }
 
         public void Send(byte[] data)
